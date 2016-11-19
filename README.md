@@ -1,4 +1,4 @@
-# :package_name
+# phisch90/oauth-server
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE)
