@@ -8,9 +8,7 @@ interface ClientRepository
 {
     /**
      * @param string $clientId
-     * @param string $clientSecret
-     * @param string $grantName
      * @return ClientEntity
      */
-    public function getClient($clientId, $clientSecret, $grantName);
+    public function getClient($clientId);
 }
