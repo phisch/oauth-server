@@ -5,6 +5,7 @@ namespace Phisch90\OAuth\Server\Grant;
 use Phisch90\OAuth\Server\Entity\ClientEntity;
 use Phisch90\OAuth\Server\Entity\ScopeEntity;
 use Phisch90\OAuth\Server\Entity\UserEntity;
+use Phisch90\OAuth\Server\Exception\AuthorizationServerException;
 use Phisch90\OAuth\Server\Repository\AccessTokenRepository;
 use Phisch90\OAuth\Server\Repository\ClientRepository;
 use Phisch90\OAuth\Server\Repository\RefreshTokenRepository;
@@ -120,19 +121,39 @@ class PasswordCredentialsGrant implements Grant
     /**
      * @param Request $request
      * @return ClientEntity
+     * @throws AuthorizationServerException
      */
     private function validateClient(Request $request)
     {
         $clientId = $request->get('client_id');
         $clientSecret = $request->get('client_secret');
 
-        $client = $this->clientRepository->getClient($clientId, $clientSecret, $this->getIdentifier());
+        $client = $this->clientRepository->getClient($clientId);
 
         if ($client instanceof ClientEntity === false) {
-            // throw invalid client exception
+            throw new AuthorizationServerException('The requested client is unknown.', null, null, 'invalid_client');
         }
 
-        // check if redirect uri matches
+        if ($client->getSecret() !== $clientSecret) {
+            throw new AuthorizationServerException(
+                'The given client_secret does not match the client.',
+                null,
+                null,
+                'invalid_client'
+            );
+        }
+
+        if (!in_array($this->getIdentifier(), $client->getGrantTypes())) {
+            throw new AuthorizationServerException(
+                'The authenticated client is not authorized to use this authorization grant type.',
+                null,
+                null,
+                'unauthorized_client'
+            );
+        }
+
+        // TODO: check if validating the uri is necessary here, should be irrelevant for password credentials grant
+        // TODO: might be neccessary if this will be used for multiple grants though
 
         return $client;
     }
