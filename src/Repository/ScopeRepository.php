@@ -14,7 +14,7 @@ interface ScopeRepository
 
     /**
      * @param array $identifiers
-     * @return ScopeEntity
+     * @return ScopeEntity[]
      */
     public function getScopes(array $identifiers);
 }

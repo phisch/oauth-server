@@ -2,14 +2,14 @@
 
 namespace Phisch90\OAuth\Server\Repository;
 
-use Phisch90\OAuth\Server\Entity\ClientEntity;
+use Phisch90\OAuth\Server\Entity\UserEntity;
 
 interface UserRepository
 {
     /**
      * @param string $username
      * @param string $password
-     * @return ClientEntity
+     * @return UserEntity
      */
     public function getUser($username, $password);
 }
