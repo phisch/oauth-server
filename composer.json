@@ -24,7 +24,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Phisch90\\Oauth\\Server\\": "src"
+      "Phisch90\\OAuth\\Server\\": "src"
     }
   },
   "autoload-dev": {
