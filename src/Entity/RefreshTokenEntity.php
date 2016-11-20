@@ -2,10 +2,10 @@
 
 namespace Phisch90\OAuth\Server\Entity;
 
-interface ScopeEntity
+interface RefreshTokenEntity
 {
     /**
      * @return string
      */
-    public function getName();
+    public function getIdentifier();
 }
