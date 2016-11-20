@@ -24,11 +24,11 @@ If you discover any security related issues, please email oauthserver@philippsch
 
 The MIT License (MIT). Please see [License File](LICENSE) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/:vendor/:package_name.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/phisch90/oauth-server.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/:vendor/:package_name/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/:vendor/:package_name.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/:vendor/:package_name.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/phisch90/oauth-server/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/phisch90/oauth-server.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/phisch90/oauth-server.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/phisch90/oauth-server.svg?style=flat-square
 
 [link-packagist]: https://packagist.org/packages/phisch90/oauth-server
