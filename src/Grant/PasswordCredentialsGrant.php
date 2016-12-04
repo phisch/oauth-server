@@ -11,6 +11,7 @@ use Phisch90\OAuth\Server\Repository\ClientRepository;
 use Phisch90\OAuth\Server\Repository\RefreshTokenRepository;
 use Phisch90\OAuth\Server\Repository\ScopeRepository;
 use Phisch90\OAuth\Server\Repository\UserRepository;
+use Phisch90\OAuth\Server\Token\Token;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -43,24 +44,32 @@ class PasswordCredentialsGrant implements Grant
     private $refreshTokenRepository;
 
     /**
+     * @var Token
+     */
+    private $token;
+
+    /**
      * @param ClientRepository $clientRepository
      * @param ScopeRepository $scopeRepository
      * @param UserRepository $userRepository
      * @param AccessTokenRepository $accessTokenRepository
      * @param RefreshTokenRepository $refreshTokenRepository
+     * @param Token $token
      */
     public function __construct(
         ClientRepository $clientRepository,
         ScopeRepository $scopeRepository,
         UserRepository $userRepository,
         AccessTokenRepository $accessTokenRepository,
-        RefreshTokenRepository $refreshTokenRepository
+        RefreshTokenRepository $refreshTokenRepository,
+        Token $token
     ) {
         $this->clientRepository = $clientRepository;
         $this->scopeRepository = $scopeRepository;
         $this->userRepository = $userRepository;
         $this->accessTokenRepository = $accessTokenRepository;
         $this->refreshTokenRepository = $refreshTokenRepository;
+        $this->token = $token;
     }
 
     /**
@@ -90,8 +99,8 @@ class PasswordCredentialsGrant implements Grant
         // generate response
 
         $responseJson = [
-            'access_token' => $accessToken->getIdentifier(),
-            'token_type' => $this->getIdentifier(),
+            'access_token' => $this->token->generate($accessToken),
+            'token_type' => $this->token->getType(),
             'expires_in' => $accessToken->getExpiryDateTime()->getTimestamp() - (new \DateTime())->getTimestamp(),
             'refresh_token' => $refreshToken->getIdentifier(),
             'scope' => $this->generateScopeList($scopes)
