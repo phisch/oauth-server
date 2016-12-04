@@ -5,7 +5,7 @@ namespace Phisch90\OAuth\Server\Response;
 use Phisch90\OAuth\Server\Exception\AuthorizationServerException;
 use Symfony\Component\HttpFoundation\Response;
 
-class HttpFoundationResponseBuilder implements ResponseBuilder 
+class HttpFoundationResponseBuilder implements ResponseBuilder
 {
     /**
      * @param AuthorizationServerException $exception
@@ -27,5 +27,4 @@ class HttpFoundationResponseBuilder implements ResponseBuilder
             ]
         );
     }
-
 }

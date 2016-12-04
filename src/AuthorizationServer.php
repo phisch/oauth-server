@@ -50,6 +50,5 @@ class AuthorizationServer
 
     public function authorizationEndpoint(Request $request)
     {
-
     }
 }
