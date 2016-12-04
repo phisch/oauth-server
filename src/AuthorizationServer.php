@@ -4,9 +4,8 @@ namespace Phisch90\OAuth\Server;
 
 use Phisch90\OAuth\Server\Exception\AuthorizationServerException;
 use Phisch90\OAuth\Server\Grant\Grant;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Phisch90\OAuth\Server\Response\ResponseBuilder;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 class AuthorizationServer
 {
@@ -16,8 +15,24 @@ class AuthorizationServer
     private $grants = [];
 
     /**
+     * @var ResponseBuilder
+     */
+    private $responseBuilder;
+
+    /**
+     * AuthorizationServer constructor.
+     * @param Grant[] $grants
+     * @param ResponseBuilder $responseBuilder
+     */
+    public function __construct(array $grants, ResponseBuilder $responseBuilder)
+    {
+        $this->grants = $grants;
+        $this->responseBuilder = $responseBuilder;
+    }
+
+    /**
      * @param Request $request
-     * @return Response
+     * @return mixed
      */
     public function tokenEndpoint(Request $request)
     {
@@ -29,30 +44,12 @@ class AuthorizationServer
             }
             throw new AuthorizationServerException('', null, null, 'unsupported_grant_type');
         } catch (AuthorizationServerException $exception) {
-            return $this->generateErrorResponse($exception);
+            return $this->responseBuilder->fromException($exception);
         }
     }
 
-    /**
-     * @param AuthorizationServerException $exception
-     * @return JsonResponse
-     */
-    private function generateErrorResponse(AuthorizationServerException $exception)
+    public function authorizationEndpoint(Request $request)
     {
-        $jsonResponseData = [
-            'error' => $exception->getErrorCode(),
-            'error_description' => $exception->getMessage(),
-            'error_uri' => '' //TODO: implement error detail endpoint and generate uris
-        ];
 
-        return new JsonResponse($jsonResponseData, 400);
-    }
-
-    /**
-     * @param Grant $grant
-     */
-    public function addGrant(Grant $grant)
-    {
-        $this->grants[] = $grant;
     }
 }
