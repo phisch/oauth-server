@@ -8,6 +8,19 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 
 
+## Things to implement
+This repository will implement multiple popular RFC's to provide as much OAuth functionality as possible. Once fully implemented, RFC's other than 6749 will be extracted into separate repositories, so a developer might only use what he needs.
+
+### RFC 6749
+The basic RFC6749 will be fully implemented in this repository.
+
+ - Authorization Server
+   - [ ] Authorization Endpoint
+   - [ ] Token Endpoint
+   - [ ] Redirection Endpoint
+ - Resource Owner
+ - Resource Server
+
 ## Install
 
 Via Composer
