@@ -2,8 +2,8 @@
 
 namespace Phisch90\OAuth\Server\Grant;
 
+use Phisch90\OAuth\Server\Response\ResponseBuilder;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 interface Grant
 {
@@ -15,7 +15,8 @@ interface Grant
 
     /**
      * @param Request $request
-     * @return Response
+     * @param ResponseBuilder $responseBuilder
+     * @return mixed
      */
-    public function handle(Request $request);
+    public function handle(Request $request, ResponseBuilder $responseBuilder);
 }
