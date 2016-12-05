@@ -4,7 +4,7 @@ namespace Phisch90\OAuth\Server\Token;
 
 use Phisch90\OAuth\Server\Entity\AccessTokenEntity;
 
-interface Token
+interface TokenType
 {
     /**
      * @param AccessTokenEntity $accessToken

@@ -4,7 +4,7 @@ namespace Phisch90\OAuth\Server\Token;
 
 use Phisch90\OAuth\Server\Entity\AccessTokenEntity;
 
-class BearerToken implements Token
+class BearerToken implements TokenType
 {
     /**
      * @param AccessTokenEntity $accessToken
