@@ -39,12 +39,12 @@ class AuthorizationServer
         try {
             foreach ($this->grants as $grant) {
                 if ($grant->supports($request)) {
-                    return $grant->handle($request);
+                    return $grant->handle($request, $this->responseBuilder);
                 }
             }
-            throw new AuthorizationServerException('', null, null, 'unsupported_grant_type');
+            throw new AuthorizationServerException('The requested grant_type is unsupported.', null, null, 'unsupported_grant_type');
         } catch (AuthorizationServerException $exception) {
-            return $this->responseBuilder->fromException($exception);
+            return $this->responseBuilder->error($exception);
         }
     }
 
