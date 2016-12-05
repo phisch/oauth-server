@@ -11,8 +11,8 @@ use Phisch90\OAuth\Server\Repository\ClientRepository;
 use Phisch90\OAuth\Server\Repository\RefreshTokenRepository;
 use Phisch90\OAuth\Server\Repository\ScopeRepository;
 use Phisch90\OAuth\Server\Repository\UserRepository;
-use Phisch90\OAuth\Server\Token\Token;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Phisch90\OAuth\Server\Response\ResponseBuilder;
+use Phisch90\OAuth\Server\Token\TokenType;
 use Symfony\Component\HttpFoundation\Request;
 
 class PasswordCredentialsGrant implements Grant
@@ -44,7 +44,7 @@ class PasswordCredentialsGrant implements Grant
     private $refreshTokenRepository;
 
     /**
-     * @var Token
+     * @var TokenType
      */
     private $token;
 
@@ -54,7 +54,7 @@ class PasswordCredentialsGrant implements Grant
      * @param UserRepository $userRepository
      * @param AccessTokenRepository $accessTokenRepository
      * @param RefreshTokenRepository $refreshTokenRepository
-     * @param Token $token
+     * @param TokenType $token
      */
     public function __construct(
         ClientRepository $clientRepository,
@@ -62,7 +62,7 @@ class PasswordCredentialsGrant implements Grant
         UserRepository $userRepository,
         AccessTokenRepository $accessTokenRepository,
         RefreshTokenRepository $refreshTokenRepository,
-        Token $token
+        TokenType $token
     ) {
         $this->clientRepository = $clientRepository;
         $this->scopeRepository = $scopeRepository;
@@ -81,7 +81,12 @@ class PasswordCredentialsGrant implements Grant
         return $request->get('grant_type') === $this->getIdentifier();
     }
 
-    public function handle(Request $request)
+    /**
+     * @param Request $request
+     * @param ResponseBuilder $responseBuilder
+     * @return mixed
+     */
+    public function handle(Request $request, ResponseBuilder $responseBuilder)
     {
         $client = $this->validateClient($request);
         $scopes = $this->validateScopes($request);
@@ -89,42 +94,13 @@ class PasswordCredentialsGrant implements Grant
 
         // check if scopes fit for client
 
-
         $expiryDateTime = (new \DateTime())->add(new \DateInterval('PT1H'));
         $accessToken = $this->accessTokenRepository->createToken($client, $user, $scopes, $expiryDateTime);
 
         $expiryDateTime = (new \DateTime())->add(new \DateInterval('P1M'));
         $refreshToken = $this->refreshTokenRepository->createToken($accessToken, $expiryDateTime);
 
-        // generate response
-
-        $responseJson = [
-            'access_token' => $this->token->generate($accessToken),
-            'token_type' => $this->token->getType(),
-            'expires_in' => $accessToken->getExpiryDateTime()->getTimestamp() - (new \DateTime())->getTimestamp(),
-            'refresh_token' => $refreshToken->getIdentifier(),
-            'scope' => $this->generateScopeList($scopes)
-        ];
-
-
-        $response = new JsonResponse(
-            $responseJson
-        );
-
-        return $response;
-    }
-
-    /**
-     * @param ScopeEntity[] $scopes
-     * @return string
-     */
-    private function generateScopeList(array $scopes)
-    {
-        $scopeNames = [];
-        foreach ($scopes as $scope) {
-            $scopeNames[] = $scope->getName();
-        }
-        return implode(' ', $scopeNames);
+        return $responseBuilder->success($this->token, $accessToken, $refreshToken, $scopes);
     }
 
     /**
@@ -162,7 +138,7 @@ class PasswordCredentialsGrant implements Grant
         }
 
         // TODO: check if validating the uri is necessary here, should be irrelevant for password credentials grant
-        // TODO: might be neccessary if this will be used for multiple grants though
+        // TODO: might be necessary if this will be used for multiple grants though
 
         return $client;
     }
@@ -189,7 +165,7 @@ class PasswordCredentialsGrant implements Grant
         $user = $this->userRepository->getUser($username, $password);
 
         if ($user instanceof UserEntity === false) {
-            // throw invalid credentials exception
+            // TODO: throw invalid credentials exception
         }
 
         return $user;
