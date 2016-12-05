@@ -2,26 +2,36 @@
 
 namespace Phisch90\OAuth\Server\Response;
 
-use Phisch90\OAuth\Server\Exception\AuthorizationServerException;
 use Symfony\Component\HttpFoundation\Response;
 
-class HttpFoundationResponseBuilder implements ResponseBuilder
+class HttpFoundationResponseBuilder extends AbstractResponseBuilder
 {
     /**
-     * @param AuthorizationServerException $exception
+     * @param array $data
+     * @param int $status
      * @return Response
      */
-    public function fromException(AuthorizationServerException $exception)
+    public function buildErrorResponse(array $data, $status)
     {
-        $jsonResponseData = [
-            'error' => $exception->getErrorCode(),
-            'error_description' => $exception->getMessage(),
-            'error_uri' => '' //TODO: implement error detail endpoint and generate uris
-        ];
-
         return new Response(
-            json_encode($jsonResponseData),
-            400,
+            json_encode($data),
+            $status,
+            [
+                'Content-Type' => 'application/json'
+            ]
+        );
+    }
+
+    /**
+     * @param array $data
+     * @param int $status
+     * @return Response
+     */
+    public function buildSuccessResponse(array $data, $status)
+    {
+        return new Response(
+            json_encode($data),
+            $status,
             [
                 'Content-Type' => 'application/json'
             ]
