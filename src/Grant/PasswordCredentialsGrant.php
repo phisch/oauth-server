@@ -166,7 +166,12 @@ class PasswordCredentialsGrant implements Grant
 
         if ($user instanceof UserEntity === false) {
             // TODO: check how to correctly handle invalid user credentials, the rfc doesn't really guide that case
-            throw new AuthorizationServerException('The given user credentials are invalid.', null, null, 'invalid_user_credentials');
+            throw new AuthorizationServerException(
+                'The given user credentials are invalid.',
+                null,
+                null,
+                'invalid_user_credentials'
+            );
         }
 
         return $user;

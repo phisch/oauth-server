@@ -42,7 +42,12 @@ class AuthorizationServer
                     return $grant->handle($request, $this->responseBuilder);
                 }
             }
-            throw new AuthorizationServerException('The requested grant_type is unsupported.', null, null, 'unsupported_grant_type');
+            throw new AuthorizationServerException(
+                'The requested grant_type is unsupported.',
+                null,
+                null,
+                'unsupported_grant_type'
+            );
         } catch (AuthorizationServerException $exception) {
             return $this->responseBuilder->error($exception);
         }
