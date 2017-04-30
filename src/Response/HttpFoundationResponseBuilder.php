@@ -1,6 +1,6 @@
 <?php
 
-namespace Phisch90\OAuth\Server\Response;
+namespace Phisch\OAuth\Server\Response;
 
 use Symfony\Component\HttpFoundation\Response;
 

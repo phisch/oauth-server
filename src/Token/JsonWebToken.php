@@ -1,6 +1,6 @@
 <?php
 
-namespace Phisch90\OAuth\Server\Token;
+namespace Phisch\OAuth\Server\Token;
 
 class JsonWebToken
 {

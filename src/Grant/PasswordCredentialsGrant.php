@@ -1,18 +1,18 @@
 <?php
 
-namespace Phisch90\OAuth\Server\Grant;
+namespace Phisch\OAuth\Server\Grant;
 
-use Phisch90\OAuth\Server\Entity\ClientEntity;
-use Phisch90\OAuth\Server\Entity\ScopeEntity;
-use Phisch90\OAuth\Server\Entity\UserEntity;
-use Phisch90\OAuth\Server\Exception\AuthorizationServerException;
-use Phisch90\OAuth\Server\Repository\AccessTokenRepository;
-use Phisch90\OAuth\Server\Repository\ClientRepository;
-use Phisch90\OAuth\Server\Repository\RefreshTokenRepository;
-use Phisch90\OAuth\Server\Repository\ScopeRepository;
-use Phisch90\OAuth\Server\Repository\UserRepository;
-use Phisch90\OAuth\Server\Response\ResponseBuilder;
-use Phisch90\OAuth\Server\Token\TokenType;
+use Phisch\OAuth\Server\Entity\ClientEntity;
+use Phisch\OAuth\Server\Entity\ScopeEntity;
+use Phisch\OAuth\Server\Entity\UserEntity;
+use Phisch\OAuth\Server\Exception\AuthorizationServerException;
+use Phisch\OAuth\Server\Repository\AccessTokenRepository;
+use Phisch\OAuth\Server\Repository\ClientRepository;
+use Phisch\OAuth\Server\Repository\RefreshTokenRepository;
+use Phisch\OAuth\Server\Repository\ScopeRepository;
+use Phisch\OAuth\Server\Repository\UserRepository;
+use Phisch\OAuth\Server\Response\ResponseBuilder;
+use Phisch\OAuth\Server\Token\TokenType;
 use Symfony\Component\HttpFoundation\Request;
 
 class PasswordCredentialsGrant implements Grant

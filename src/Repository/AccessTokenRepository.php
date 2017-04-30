@@ -1,11 +1,11 @@
 <?php
 
-namespace Phisch90\OAuth\Server\Repository;
+namespace Phisch\OAuth\Server\Repository;
 
-use Phisch90\OAuth\Server\Entity\AccessTokenEntity;
-use Phisch90\OAuth\Server\Entity\ClientEntity;
-use Phisch90\OAuth\Server\Entity\ScopeEntity;
-use Phisch90\OAuth\Server\Entity\UserEntity;
+use Phisch\OAuth\Server\Entity\AccessTokenEntity;
+use Phisch\OAuth\Server\Entity\ClientEntity;
+use Phisch\OAuth\Server\Entity\ScopeEntity;
+use Phisch\OAuth\Server\Entity\UserEntity;
 
 interface AccessTokenRepository
 {

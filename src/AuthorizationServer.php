@@ -1,10 +1,10 @@
 <?php
 
-namespace Phisch90\OAuth\Server;
+namespace Phisch\OAuth\Server;
 
-use Phisch90\OAuth\Server\Exception\AuthorizationServerException;
-use Phisch90\OAuth\Server\Grant\Grant;
-use Phisch90\OAuth\Server\Response\ResponseBuilder;
+use Phisch\OAuth\Server\Exception\AuthorizationServerException;
+use Phisch\OAuth\Server\Grant\Grant;
+use Phisch\OAuth\Server\Response\ResponseBuilder;
 use Symfony\Component\HttpFoundation\Request;
 
 class AuthorizationServer

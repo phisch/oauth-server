@@ -1,9 +1,9 @@
 <?php
 
-namespace Phisch90\OAuth\Server\Repository;
+namespace Phisch\OAuth\Server\Repository;
 
-use Phisch90\OAuth\Server\Entity\AccessTokenEntity;
-use Phisch90\OAuth\Server\Entity\RefreshTokenEntity;
+use Phisch\OAuth\Server\Entity\AccessTokenEntity;
+use Phisch\OAuth\Server\Entity\RefreshTokenEntity;
 
 interface RefreshTokenRepository
 {

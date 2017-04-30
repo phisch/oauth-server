@@ -26,12 +26,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Phisch90\\OAuth\\Server\\": "src"
+      "Phisch\\OAuth\\Server\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Phisch90\\OAuth\\Server\\": "tests"
+      "Phisch\\OAuth\\Server\\": "tests"
     }
   },
   "extra": {

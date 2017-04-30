@@ -1,6 +1,6 @@
 <?php
 
-namespace Phisch90\OAuth\Server\Exception;
+namespace Phisch\OAuth\Server\Exception;
 
 use Exception;
 

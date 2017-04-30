@@ -1,6 +1,6 @@
 <?php
 
-namespace Phisch90\OAuth\Server\Entity;
+namespace Phisch\OAuth\Server\Entity;
 
 interface AccessTokenEntity
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Phisch90\OAuth\Server\Repository;
+namespace Phisch\OAuth\Server\Repository;
 
-use Phisch90\OAuth\Server\Entity\ScopeEntity;
+use Phisch\OAuth\Server\Entity\ScopeEntity;
 
 interface ScopeRepository
 {

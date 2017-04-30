@@ -1,16 +1,16 @@
 <?php
 
-namespace Phisch90\OAuth\Server\Response;
+namespace Phisch\OAuth\Server\Response;
 
-use Phisch90\OAuth\Server\Entity\AccessTokenEntity;
-use Phisch90\OAuth\Server\Entity\RefreshTokenEntity;
-use Phisch90\OAuth\Server\Entity\ScopeEntity;
-use Phisch90\OAuth\Server\Exception\AuthorizationServerException;
-use Phisch90\OAuth\Server\Token\TokenType;
+use Phisch\OAuth\Server\Entity\AccessTokenEntity;
+use Phisch\OAuth\Server\Entity\RefreshTokenEntity;
+use Phisch\OAuth\Server\Entity\ScopeEntity;
+use Phisch\OAuth\Server\Exception\AuthorizationServerException;
+use Phisch\OAuth\Server\Token\TokenType;
 
 /**
  * TODO: check if buildSuccessResponse and buildErrorResponse can be replaced with one single buildResponse method
- * @package Phisch90\OAuth\Server\Response
+ * @package Phisch\OAuth\Server\Response
  */
 interface ResponseBuilder
 {

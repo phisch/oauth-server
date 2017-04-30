@@ -1,8 +1,8 @@
 <?php
 
-namespace Phisch90\OAuth\Server\Grant;
+namespace Phisch\OAuth\Server\Grant;
 
-use Phisch90\OAuth\Server\Response\ResponseBuilder;
+use Phisch\OAuth\Server\Response\ResponseBuilder;
 use Symfony\Component\HttpFoundation\Request;
 
 interface Grant
