@@ -1,5 +1,5 @@
 {
-  "name": "phisch90/oauth-server",
+  "name": "phisch/oauth-server",
   "type": "library",
   "description": "An OAuth 2.0 authorization and resource server library.",
   "keywords": [
@@ -11,7 +11,7 @@
   "authors": [
     {
       "name": "Philipp Schaffrath",
-      "email": "oauthserver@philippschaffrath.de",
+      "email": "github@philipp.schaffrath.email",
       "role": "Developer"
     }
   ],
