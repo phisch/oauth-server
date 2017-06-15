@@ -11,11 +11,11 @@ use Phisch\OAuth\Server\Repository\ClientRepositoryInterface;
 use Phisch\OAuth\Server\Repository\RefreshTokenRepositoryInterface;
 use Phisch\OAuth\Server\Repository\ScopeRepositoryInterface;
 use Phisch\OAuth\Server\Repository\UserRepositoryInterface;
-use Phisch\OAuth\Server\Response\ResponseBuilder;
-use Phisch\OAuth\Server\Token\TokenType;
+use Phisch\OAuth\Server\Response\ResponseBuilderInterface;
+use Phisch\OAuth\Server\Token\TokenTypeInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-class PasswordCredentialsGrant implements Grant
+class AuthorizationCodeGrant implements AuthorizationGrantInterface
 {
 
     /**
@@ -44,7 +44,7 @@ class PasswordCredentialsGrant implements Grant
     private $refreshTokenRepository;
 
     /**
-     * @var TokenType
+     * @var TokenTypeInterface
      */
     private $token;
 
@@ -54,7 +54,7 @@ class PasswordCredentialsGrant implements Grant
      * @param UserRepositoryInterface $userRepository
      * @param AccessTokenRepositoryInterface $accessTokenRepository
      * @param RefreshTokenRepositoryInterface $refreshTokenRepository
-     * @param TokenType $token
+     * @param TokenTypeInterface $token
      */
     public function __construct(
         ClientRepositoryInterface $clientRepository,
@@ -62,7 +62,7 @@ class PasswordCredentialsGrant implements Grant
         UserRepositoryInterface $userRepository,
         AccessTokenRepositoryInterface $accessTokenRepository,
         RefreshTokenRepositoryInterface $refreshTokenRepository,
-        TokenType $token
+        TokenTypeInterface $token
     ) {
         $this->clientRepository = $clientRepository;
         $this->scopeRepository = $scopeRepository;
@@ -78,15 +78,15 @@ class PasswordCredentialsGrant implements Grant
      */
     public function supports(Request $request)
     {
-        return $request->get('grant_type') === $this->getIdentifier();
+        return $request->get('response_type') === $this->getIdentifier();
     }
 
     /**
      * @param Request $request
-     * @param ResponseBuilder $responseBuilder
+     * @param ResponseBuilderInterface $responseBuilder
      * @return mixed
      */
-    public function handle(Request $request, ResponseBuilder $responseBuilder)
+    public function handle(Request $request, ResponseBuilderInterface $responseBuilder)
     {
         $client = $this->validateClient($request);
         $scopes = $this->validateScopes($request);
@@ -182,6 +182,18 @@ class PasswordCredentialsGrant implements Grant
      */
     private function getIdentifier()
     {
-        return 'password';
+        return 'code';
     }
+
+    public function cancel()
+    {
+        // TODO: Implement cancel() method.
+    }
+
+    public function validate(Request $request)
+    {
+        //throw new AuthorizationServerException('fuck fuck fuck',0, null, 'yeah, something went horribly wrong!');
+    }
+
+
 }

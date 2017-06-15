@@ -2,7 +2,7 @@
 
 namespace Phisch\OAuth\Server\Entity;
 
-interface ClientEntity
+interface ClientEntityInterface
 {
     /**
      * @return array

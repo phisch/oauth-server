@@ -2,7 +2,7 @@
 
 namespace Phisch\OAuth\Server\Entity;
 
-interface AccessTokenEntity
+interface AccessTokenEntityInterface
 {
     /**
      * @return string
@@ -10,17 +10,17 @@ interface AccessTokenEntity
     public function getIdentifier();
 
     /**
-     * @return ClientEntity
+     * @return ClientEntityInterface
      */
     public function getClient();
 
     /**
-     * @return UserEntity
+     * @return UserEntityInterface
      */
     public function getUser();
 
     /**
-     * @return ScopeEntity[]
+     * @return ScopeEntityInterface[]
      */
     public function getScopes();
 

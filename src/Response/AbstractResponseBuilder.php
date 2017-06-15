@@ -2,25 +2,25 @@
 
 namespace Phisch\OAuth\Server\Response;
 
-use Phisch\OAuth\Server\Entity\AccessTokenEntity;
-use Phisch\OAuth\Server\Entity\RefreshTokenEntity;
-use Phisch\OAuth\Server\Entity\ScopeEntity;
+use Phisch\OAuth\Server\Entity\AccessTokenEntityInterface;
+use Phisch\OAuth\Server\Entity\RefreshTokenEntityInterface;
+use Phisch\OAuth\Server\Entity\ScopeEntityInterface;
 use Phisch\OAuth\Server\Exception\AuthorizationServerException;
-use Phisch\OAuth\Server\Token\TokenType;
+use Phisch\OAuth\Server\Token\TokenTypeInterface;
 
-abstract class AbstractResponseBuilder implements ResponseBuilder
+abstract class AbstractResponseBuilder implements ResponseBuilderInterface
 {
     /**
-     * @param TokenType $tokenType
-     * @param AccessTokenEntity $accessToken
-     * @param RefreshTokenEntity|null $refreshToken
-     * @param ScopeEntity[]|null $scopes
+     * @param TokenTypeInterface $tokenType
+     * @param AccessTokenEntityInterface $accessToken
+     * @param RefreshTokenEntityInterface|null $refreshToken
+     * @param ScopeEntityInterface[]|null $scopes
      * @return mixed
      */
     public function success(
-        TokenType $tokenType,
-        AccessTokenEntity $accessToken,
-        RefreshTokenEntity $refreshToken = null,
+        TokenTypeInterface $tokenType,
+        AccessTokenEntityInterface $accessToken,
+        RefreshTokenEntityInterface $refreshToken = null,
         array $scopes = null
     ) {
         $data = [
@@ -30,7 +30,7 @@ abstract class AbstractResponseBuilder implements ResponseBuilder
         ];
 
         // refresh token is optional
-        if ($refreshToken instanceof RefreshTokenEntity) {
+        if ($refreshToken instanceof RefreshTokenEntityInterface) {
             // TODO: check if refresh_token should use the same token type as access_token
             $data['refresh_token'] = $refreshToken->getIdentifier();
         }
@@ -60,7 +60,19 @@ abstract class AbstractResponseBuilder implements ResponseBuilder
     }
 
     /**
-     * @param ScopeEntity[] $scopes
+     * @param AuthorizationServerException $exception
+     */
+    public function errorRedirect(AuthorizationServerException $exception)
+    {
+        return $this->buildErrorRedirectResponse(
+
+            $exception->getErrorCode()
+
+        );
+    }
+
+    /**
+     * @param ScopeEntityInterface[] $scopes
      * @return string
      */
     private function generateScopeList(array $scopes)

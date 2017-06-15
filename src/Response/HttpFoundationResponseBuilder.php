@@ -2,6 +2,7 @@
 
 namespace Phisch\OAuth\Server\Response;
 
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 class HttpFoundationResponseBuilder extends AbstractResponseBuilder
@@ -20,6 +21,18 @@ class HttpFoundationResponseBuilder extends AbstractResponseBuilder
                 'Content-Type' => 'application/json'
             ]
         );
+    }
+
+    /**
+     * @param $redirectionUri
+     * @param $error
+     * @param $description
+     * @param $errorUri
+     * @return RedirectResponse
+     */
+    public function buildErrorRedirectResponse($redirectionUri, $error, $description, $errorUri)
+    {
+        return new RedirectResponse('/', 302);
     }
 
     /**

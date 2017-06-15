@@ -2,7 +2,7 @@
 
 namespace Phisch\OAuth\Server\Entity;
 
-interface RefreshTokenEntity
+interface RefreshTokenEntityInterface
 {
     /**
      * @return string

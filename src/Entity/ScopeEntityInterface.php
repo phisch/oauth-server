@@ -2,7 +2,7 @@
 
 namespace Phisch\OAuth\Server\Entity;
 
-interface ScopeEntity
+interface ScopeEntityInterface
 {
     /**
      * @return string
