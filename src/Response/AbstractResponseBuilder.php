@@ -65,9 +65,7 @@ abstract class AbstractResponseBuilder implements ResponseBuilderInterface
     public function errorRedirect(AuthorizationServerException $exception)
     {
         return $this->buildErrorRedirectResponse(
-
             $exception->getErrorCode()
-
         );
     }
 

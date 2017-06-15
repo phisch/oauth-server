@@ -16,5 +16,10 @@ interface AccessTokenRepositoryInterface
      * @param \DateTime $expires
      * @return AccessTokenEntityInterface
      */
-    public function createToken(ClientEntityInterface $client, UserEntityInterface $user, array $scopes, \DateTime $expires);
+    public function createToken(
+        ClientEntityInterface $client,
+        UserEntityInterface $user,
+        array $scopes,
+        \DateTime $expires
+    );
 }

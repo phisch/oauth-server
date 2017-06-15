@@ -194,6 +194,4 @@ class AuthorizationCodeGrant implements AuthorizationGrantInterface
     {
         //throw new AuthorizationServerException('fuck fuck fuck',0, null, 'yeah, something went horribly wrong!');
     }
-
-
 }
